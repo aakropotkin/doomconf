@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src zsh ... block
+# key: <zsh
+# type: command
+# --
+(doom-snippets-expand :uuid "src_zsh")

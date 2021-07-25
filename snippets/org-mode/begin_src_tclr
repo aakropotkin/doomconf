@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src tcl :results output ... block
+# key: <tclr
+# type: command
+# --
+(doom-snippets-expand :uuid "src_tclr")

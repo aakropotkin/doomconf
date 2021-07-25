@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src python :results output ... block
+# key: <pyr
+# type: command
+# --
+(doom-snippets-expand :uuid "src_pyr")

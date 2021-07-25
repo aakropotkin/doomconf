@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src sh
+# uuid: src_sh
+# key: src_sh
+# --
+#+BEGIN_SRC sh
+`%`$0
+#+END_SRC
+

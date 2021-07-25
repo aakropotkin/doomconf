@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src zsh
+# uuid: src_zsh
+# key: src_zsh
+# --
+#+BEGIN_SRC zsh
+`%`$0
+#+END_SRC
+

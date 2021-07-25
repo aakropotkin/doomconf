@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src python ... block
+# key: <py
+# type: command
+# --
+(doom-snippets-expand :uuid "src_py")

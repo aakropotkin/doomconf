@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src sh :results output
+# uuid: src_shr
+# key: src_shr
+# --
+#+BEGIN_SRC sh :results output
+`%`$0
+#+END_SRC
+

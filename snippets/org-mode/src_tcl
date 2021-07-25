@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src tcl
+# uuid: src_tcl
+# key: src_tcl
+# --
+#+BEGIN_SRC tcl
+`%`$0
+#+END_SRC
+

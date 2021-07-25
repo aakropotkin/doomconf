@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src sh :results output ... block
+# key: <shr
+# type: command
+# --
+(doom-snippets-expand :uuid "src_shr")

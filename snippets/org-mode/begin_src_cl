@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #+begin_src lisp ... block
+# key: <cl
+# type: command
+# --
+(sly-mode)
+(doom-snippets-expand :uuid "src_cl")

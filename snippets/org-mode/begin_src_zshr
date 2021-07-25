@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src zsh :results output ... block
+# key: <zshr
+# type: command
+# --
+(doom-snippets-expand :uuid "src_zshr")

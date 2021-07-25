@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src lisp
+# uuid: src_cl
+# key: src_cl
+# --
+#+BEGIN_SRC lisp
+`%`$0
+#+END_SRC
+
