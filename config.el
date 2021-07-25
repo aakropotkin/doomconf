@@ -41,7 +41,9 @@
 ;;
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/docs/notes/")
+(setq org-directory (if (eq config-kind :WORK)
+                        "~/docs/"
+                      "~/docs/notes/"))
 
 (use-package! org-roam
   :custom
