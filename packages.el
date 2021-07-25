@@ -52,5 +52,7 @@
 
 (package! fill-column-indicator)
 (package! evil-visual-replace)
-;;(package! slime)
 (package! sly)
+
+(when (eq config-kind :WORK)
+  (package! p4))
