@@ -42,12 +42,31 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory (if (eq config-kind :WORK)
-                        "~/docs/"
-                      "~/docs/notes/"))
+                        "~/docs"
+                      "~/docs/notes"))
+
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
+(setq org-capture-templates '())
+
+(add-to-list
+ 'org-capture-templates
+ '("P" "Protocol" entry
+   (file+headline +org-capture-notes-file "Inbox")
+   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"))
+
+(add-to-list
+ 'org-capture-templates
+ '("L" "Protocol Link" entry
+   (file+headline +org-capture-notes-file "Inbox")
+   "* %? [[%:link][%:description]] \nCaptured On: %U"))
+
 
 (use-package! org-roam
+  :ensure t
+  :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename org-directory)))
+  (org-roam-directory (file-truename (concat org-directory "/roam"))))
 
 (after! org
   ;; Sh ( Bash )
