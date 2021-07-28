@@ -85,13 +85,39 @@
     (file+headline +org-capture-notes-file "Inbox")
      "* %? [[%:link][%:description]] \nCaptured On: %U")))
 
+
 (defun org-get-headline-at-point ()
+  "Return the Org headline at the cursor.
+This is suitable for use with `org-map-entries' calls to collect headlines."
   (interactive)
-  (message "%s"
-           (seq-drop-while (lambda (elt) (or (eq elt ?\*) (eq elt ?\s)))
-                           (buffer-substring-no-properties
-                             (line-beginning-position)
-                             (line-end-position)))))
+  (save-excursion
+    (org-back-to-heading)
+    (message "%s"
+             (seq-drop-while (lambda (elt) (or (eq elt ?\*) (eq elt ?\s)))
+                             (buffer-substring-no-properties
+                               (line-beginning-position)
+                               (line-end-position))))))
+
+;; This is the danks:
+;;
+;; (org-list-to-lisp)  ; targets under cursor
+;;
+;; For example, the following list:
+;;  1. first item
+;;     + sub-item one
+;;     + [X] sub-item two
+;;     more text in first item
+;;  2. [@3] last item
+;;
+;; is parsed as
+;;
+;;  (ordered
+;;   ("first item"
+;;    (unordered
+;;     ("sub-item one")
+;;     ("[X] sub-item two"))
+;;    "more text in first item")
+;;   ("[@3] last item"))
 
 
 (use-package! org-roam
