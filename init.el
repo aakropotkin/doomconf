@@ -15,7 +15,7 @@
 ;;      directory (for easy access to its source code).
 
 (setq config-kind
-      (if (string= (system-name) "sjcl-aameen")
+      (if (string= (system-name) "sjcvl-aameen")
           :WORK
         :HOME))
 

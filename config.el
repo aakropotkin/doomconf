@@ -11,8 +11,10 @@
 ;;
 ;; -------------------------------------------------------------------------- ;;
 
-(setq user-full-name "Alex Ameen"
-      user-mail-address "alex.ameen.tx@gmail.com")
+(setq user-full-name    "Alex Ameen"
+      user-mail-address (if (eq config-kind :HOME)
+                          "alex.ameen.tx@gmail.com"
+                          "aameen@cadence.com"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -47,19 +49,22 @@
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
-(setq org-capture-templates '())
+;; Setting these before `org' is explicitly used is necessary for org protocol.
+(setq org-capture-templates
+  '(("P" "Protocol" entry
+    (file+headline +org-capture-notes-file "Inbox")
+     "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+   ("L" "Protocol Link" entry
+    (file+headline +org-capture-notes-file "Inbox")
+     "* %? [[%:link][%:description]] \nCaptured On: %U")))
 
-(add-to-list
- 'org-capture-templates
- '("P" "Protocol" entry
-   (file+headline +org-capture-notes-file "Inbox")
-   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?"))
-
-(add-to-list
- 'org-capture-templates
- '("L" "Protocol Link" entry
-   (file+headline +org-capture-notes-file "Inbox")
-   "* %? [[%:link][%:description]] \nCaptured On: %U"))
+(defun org-get-headline-at-point ()
+  (interactive)
+  (message "%s"
+           (seq-drop-while (lambda (elt) (or (eq elt ?\*) (eq elt ?\s)))
+                           (buffer-substring-no-properties
+                             (line-beginning-position)
+                             (line-end-position)))))
 
 
 (use-package! org-roam
@@ -205,6 +210,13 @@ Return the list of results."
   :defer t
   :config
   (setq inferior-lisp-program "sbcl"))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(when (eq config-kind :WORK)
+  (add-load-path! "/grid/common/pkgs/llvm/v6.0.1/share/clang/")
+  (use-package! clang-include-fixer))
 
 
 ;; -------------------------------------------------------------------------- ;;
