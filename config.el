@@ -49,6 +49,33 @@
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
+(defun org-open-default-notes ()
+  "Open the default Org notes file set by `org-default-notes-file'."
+  (find-file org-default-notes-file))
+
+(defun evil-org-notes ()
+  "Open the default Org notes file set by `org-default-notes-file'."
+  (interactive)
+  (org-open-default-notes))
+
+(evil-ex-define-cmd "org-open-default-notes" 'evil-org-notes)
+(evil-ex-define-cmd "org-notes"              'evil-org-notes)
+
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       :desc "Org default notes" "h" #'evil-org-notes))
+
+;; Insert "Open `org-notes'" as below "Reload last session" ( second element )
+(setcdr
+ +doom-dashboard-menu-sections
+ (cons
+  '("Open org-notes"
+    :icon (all-the-icons-fileicon "org" :face 'doom-dashboard-menu-title)
+    :when (file-exists-p org-default-notes-file)
+    :action evil-org-notes)
+  (cdr +doom-dashboard-menu-sections)))
+
+
 ;; Setting these before `org' is explicitly used is necessary for org protocol.
 (setq org-capture-templates
   '(("P" "Protocol" entry
@@ -172,11 +199,13 @@ Return the list of results."
 (defun insert-shell-output (command)
   "Insert output of shell COMMAND at point in current buffer."
   (insert (shell-command-to-string command)))
+
 (after! evil
   (defun evil-insert-shell-output (command)
     "Makes `insert-shell-output' available as an EX command."
     (interactive "MShell Command: ")
     (insert-shell-output command))
+
   (evil-ex-define-cmd "insert-shell-output" 'evil-insert-shell-output)
   ;; maps ` i\'
   (map! :leader
