@@ -37,6 +37,7 @@
 ;; `load-theme' function. This is the default:
 
 (setq doom-theme 'doom-one)
+(set-face-background 'mouse "white")
 
 
 ;; -------------------------------------------------------------------------- ;;
