@@ -149,6 +149,10 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
   (add-to-list 'org-structure-template-alist
                '("pyr" . "src python :results output")))
 
+(after! ox
+  (require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines)))
+
 
 ;; -------------------------------------------------------------------------- ;;
 
