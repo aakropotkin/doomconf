@@ -53,8 +53,9 @@
 (package! fill-column-indicator)
 (package! evil-visual-replace)
 (package! sly)
+(package! jq-mode)
 
 (when (eq config-kind :WORK)
   (package! p4))
 
-(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))
+;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))

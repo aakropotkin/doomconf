@@ -164,6 +164,12 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
 
 
 ;; -------------------------------------------------------------------------- ;;
+
+(add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
+
+
+
+;; -------------------------------------------------------------------------- ;;
 ;;
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
