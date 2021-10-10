@@ -321,6 +321,21 @@ Return the list of results."
 
 ;; -------------------------------------------------------------------------- ;;
 
+;(use-package! ccls
+;  :after projectile
+;  :custom
+;    (ccls-args nil)
+;    (ccls-executable (executable-find "ccls"))
+;    (projectile-project-root-files-top-down-recurring
+;      (append '("compile_commands.json" ".ccls")
+;              projectile-project-root-files-top-down-recurring))
+;  :config
+;    (push ".ccls-cache" projectile-globally-ignored-directories))
+
+
+
+;; -------------------------------------------------------------------------- ;;
+
 (when (eq config-kind :WORK)
   (use-package! p4))
 
