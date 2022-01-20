@@ -3,7 +3,7 @@
 # contributor: Henrik Lissner
 # --
 
-#ifndef ${1:`_(upcase (file-name-base buffer-file-name))`_H$(upcase yas-text)}
+#ifndef ${1:`_(upcase (file-name-base))`_H$(upcase yas-text)}
 #define $1
 
 /* ========================================================================== */

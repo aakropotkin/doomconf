@@ -164,9 +164,17 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
 
 
 ;; -------------------------------------------------------------------------- ;;
+;; Set mode by file extension
 
 (add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
 
+
+;; -------------------------------------------------------------------------- ;;
+
+(use-package! shell
+  :config
+  (setq sh-basic-offset 2
+        sh-indentation  2))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -291,7 +299,8 @@ Return the list of results."
 	:config
   (setq indent-tabs-mode t     ;; Pressing TAB should cause indentation
         c-indent-level 2       ;; A TAB is equivelant to two spaces
-        c-tab-always-indent t c-basic-offset 2
+        c-tab-always-indent t
+        c-basic-offset 2
         tab-width 2
         evil-shift-width 2
         backward-delete-function nil  ;; Do not expand tabs when deleting
@@ -317,6 +326,15 @@ Return the list of results."
 
   (mappairs 'c-set-offset '((defun-open         -)
                             (substatement-open  +))))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(use-package! go-mode
+        :config
+  (setq indent-tabs-mode t
+        tab-width 2
+        evil-shift-width 2))
 
 
 ;; -------------------------------------------------------------------------- ;;
