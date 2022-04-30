@@ -58,4 +58,6 @@
 (when (eq config-kind :WORK)
   (package! p4))
 
+(package! tramp)
+
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))

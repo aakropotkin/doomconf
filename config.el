@@ -18,6 +18,12 @@
 
 
 ;; -------------------------------------------------------------------------- ;;
+
+(setq tramp-default-method "ssh")
+(autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
+
+
+;; -------------------------------------------------------------------------- ;;
 ;;
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
