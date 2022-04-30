@@ -5,9 +5,9 @@
 , useClient ? false
 }:
 stdenv.mkDerivation {
-  pname   = "my-emacs";
+  pname   = "emacs-client-wrapper";
   version = "0.0.1";
-  src = ./bin/my-emacs;
+  src = ./bin/emacs-client-wrapper;
   nativeBuildInputs = [makeWrapper];
   dontUnpack = true;
   dontConfigure = true;
@@ -15,10 +15,10 @@ stdenv.mkDerivation {
   dontCheck = true;
   installPhase = ''
     mkdir -p $out/bin;
-    cat $src > $out/bin/.my-emacs-unwrapped;
-    chmod +x $out/bin/.my-emacs-unwrapped;
-    makeWrapper $out/bin/.my-emacs-unwrapped $out/bin/my-emacs               \
-      --argv0 my-emacs                                                       \
+    cat $src > $out/bin/.emacs-client-wrapper-unwrapped;
+    chmod +x $out/bin/.emacs-client-wrapper-unwrapped;
+    makeWrapper $out/bin/.emacs-client-wrapper-unwrapped $out/bin/emacs      \
+      --argv0 emacs-client-wrapper                                           \
       ${if useClient then "--set USE_CLIENT ':'" else "--unset USE_CLIENT"}  \
       --set GREP "${gnugrep}/bin/grep"                                       \
       --set EMACS "${emacs}/bin/emacs"                                       \

@@ -9,8 +9,8 @@
     packages = systemMap ( system:
       let pkgsFor = import nixpkgs { inherit system; };
       in rec {
-        my-emacs = pkgsFor.callPackage ./default.nix {};
-        default = my-emacs;
+        emacs-client-wrapper = pkgsFor.callPackage ./default.nix {};
+        default = emacs-client-wrapper;
       }
     );
     defaultPackages = systemMap ( system: self.packages.${system}.default );
