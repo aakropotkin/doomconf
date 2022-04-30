@@ -16,11 +16,10 @@ set -eu;
 : "${EMACS:=emacs}";
 : "${GREP:=grep}";
 
-_EMACS_CMD=;
-
 
 # ---------------------------------------------------------------------------- #
 
+# Detect if an emacs daemon is currently running with live frames.
 daemon_running_p() {
   ${EMACSCLIENT:?} -n -e "(if (> (length (frame-list)) 1) 't)" 2>/dev/null  \
     |${GREP:?} -q '^t$';
@@ -29,17 +28,20 @@ daemon_running_p() {
 
 # ---------------------------------------------------------------------------- #
 
+# Disable logging
+exec 1>/dev/null;
+exec 2>/dev/null;
+
 if test "$USE_CLIENT"; then
-  _EMACS_CMD="${EMACSCLIENT:?}";
   set -- -nqc "$@";
-  if daemon_running_p; then
+  if ! daemon_running_p; then
     set -- -a '' "$@";
   fi
+  exec ${EMACSCLIENT:?} "$@";
 else
-  _EMACS_CMD="${EMACS:?}";
+  nohup setsid ${EMACS:?} "$@" &
 fi
 
-exec ${_EMACS_CMD:?} "$@" 2>/dev/null 1>/dev/null;
 
 
 # ---------------------------------------------------------------------------- #
