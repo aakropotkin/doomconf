@@ -9,6 +9,7 @@ stdenv.mkDerivation {
   version = "0.0.1";
   src = ./bin/my-emacs;
   nativeBuildInputs = [makeWrapper];
+  dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
   dontCheck = true;
