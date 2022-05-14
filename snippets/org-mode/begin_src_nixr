@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: #+begin_src nix :results output ... block
+# key: <nixr
+# type: command
+# --
+(doom-snippets-expand :uuid "src_nixr")

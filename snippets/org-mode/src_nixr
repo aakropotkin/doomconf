@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src nix :results output
+# uuid: src_nixr
+# key: src_nixr
+# --
+#+BEGIN_SRC nix :results output
+`%`$0
+#+END_SRC
+

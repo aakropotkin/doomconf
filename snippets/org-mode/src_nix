@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: #+begin_src nix
+# uuid: src_nix
+# key: src_nix
+# --
+#+BEGIN_SRC nix
+`%`$0
+#+END_SRC
+
