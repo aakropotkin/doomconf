@@ -17,7 +17,9 @@ stdenv.mkDerivation {
     mkdir -p $out/bin;
     cat $src > $out/bin/.emacs-client-wrapper-unwrapped;
     chmod +x $out/bin/.emacs-client-wrapper-unwrapped;
-    makeWrapper $out/bin/.emacs-client-wrapper-unwrapped $out/bin/emacs      \
+    makeWrapper                                                              \
+      $out/bin/.emacs-client-wrapper-unwrapped                               \
+      $out/bin/emacs-client-wrapper                                          \
       --argv0 emacs-client-wrapper                                           \
       ${if useClient then "--set USE_CLIENT ':'" else "--unset USE_CLIENT"}  \
       --set GREP "${gnugrep}/bin/grep"                                       \
