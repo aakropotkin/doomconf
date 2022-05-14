@@ -133,34 +133,27 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
   :custom
   (org-roam-directory (file-truename (concat org-directory "/roam"))))
 
-(after! org
-  ;; Sh ( Bash )
-  (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
-  (add-to-list 'org-structure-template-alist
-               '("shr" . "src sh :results output"))
-  ;; Zsh
-  (add-to-list 'org-structure-template-alist '("zsh" . "src zsh"))
-  (add-to-list 'org-structure-template-alist
-               '("zshr" . "src zsh :results output"))
-  ;; Common Lisp
-  (add-to-list 'org-structure-template-alist '("cl" . "src lisp"))
-  (add-to-list 'org-structure-template-alist
-               '("clr" . "src lisp :results output"))
-  ;; Tcl
-  (add-to-list 'org-structure-template-alist '("tcl" . "src tcl"))
-  (add-to-list 'org-structure-template-alist
-               '("tclr" . "src tcl :results output"))
-  ;; Python
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
-  (add-to-list 'org-structure-template-alist
-               '("pyr" . "src python :results output"))
+(defun org-structure--mk-lang (lang &optional alias)
+  (let* ((name (or alias lang))
+         (t-base (concat "src " lang))
+         (t-rsl (concat t-base " :results output :exports results"))
+         (t-lit (concat t-base " :results both :exports both")))
+    (dolist (structure
+            (list (cons name t-base)
+                  (cons (concat name "r") t-rsl)
+                  (cons (concat name "l") t-lit)))
+        (add-to-list 'org-structure-template-alist structure))))
 
-  ;; Nix
-  (add-to-list 'org-structure-template-alist '("nix" . "src nix"))
-  (add-to-list 'org-structure-template-alist
-               '("nixr" . "src nix :results output"))
-  (add-to-list 'org-structure-template-alist
-               '("nixl" . "src nix :results both :exports both"))
+(defun org-add-custom-templates ()
+  (progn (org-structure--mk-lang "sh")
+         (org-structure--mk-lang "zsh")
+         (org-structure--mk-lang "lisp" "cl")
+         (org-structure--mk-lang "tcl")
+         (org-structure--mk-lang "python" "py")
+         (org-structure--mk-lang "nix")))
+
+(after! org
+	(org-add-custom-templates)
 
   ;; I cribbed most of this from
   ;; https://github.com/pope/ob-go/blob/master/ob-go.el
@@ -196,8 +189,17 @@ by `org-babel-execute-src-block'"
 
 ;; -------------------------------------------------------------------------- ;;
 
-(setq org-html-head-dank "<meta http-equiv='X-UA-Compatible' content='IE=edge'><meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'><style>html{touch-action:manipulation;-webkit-text-size-adjust:100%}body{padding:0;margin:0;background:#f2f6fa;color:#3c495a;font-weight:normal;font-size:15px;font-family:'San Francisco','Roboto','Arial',sans-serif}h2,h3,h4,h5,h6{font-family:'Trebuchet MS',Verdana,sans-serif;color:#586b82;padding:0;margin:20px 0 10px 0;font-size:1.1em}h2{margin:30px 0 10px 0;font-size:1.2em}a{color:#3fa7ba;text-decoration:none}p{margin:6px 0;text-align:justify}ul,ol{margin:0;text-align:justify}ul>li>code{color:#586b82}pre{white-space:pre-wrap}#content{width:96%;max-width:1000px;margin:2% auto 6% auto;background:white;border-radius:2px;border-right:1px solid #e2e9f0;border-bottom:2px solid #e2e9f0;padding:0 115px 150px 115px;box-sizing:border-box}#postamble{display:none}h1.title{background-color:#343C44;color:#fff;margin:0 -115px;padding:60px 0;font-weight:normal;font-size:2em;border-top-left-radius:2px;border-top-right-radius:2px}@media (max-width: 1050px){#content{padding:0 70px 100px 70px}h1.title{margin:0 -70px}}@media (max-width: 800px){#content{width:100%;margin-top:0;margin-bottom:0;padding:0 4% 60px 4%}h1.title{margin:0 -5%;padding:40px 5%}}pre,.verse{box-shadow:none;background-color:#f9fbfd;border:1px solid #e2e9f0;color:#586b82;padding:10px;font-family:monospace;overflow:auto;margin:6px 0}#table-of-contents{margin-bottom:50px;margin-top:50px}#table-of-contents h2{margin-bottom:5px}#text-table-of-contents ul{padding-left:15px}#text-table-of-contents>ul{padding-left:0}#text-table-of-contents li{list-style-type:none}#text-table-of-contents a{color:#7c8ca1;font-size:0.95em;text-decoration:none}table{border-color:#586b82;font-size:0.95em}table thead{color:#586b82}table tbody tr:nth-child(even){background:#f9f9f9}table tbody tr:hover{background:#586b82!important;color:white}table .left{text-align:left}table .right{text-align:right}.todo{font-family:inherit;color:inherit}.done{color:inherit}.tag{background:initial}.tag>span{background-color:#eee;font-family:monospace;padding-left:7px;padding-right:7px;border-radius:2px;float:right;margin-left:5px}#text-table-of-contents .tag>span{float:none;margin-left:0}.timestamp{color:#7c8ca1}@media print{@page{margin-bottom:3cm;margin-top:3cm;margin-left:2cm;margin-right:2cm;font-size:10px}#content{border:none}}</style>")
-
+(setq org-html-head-dank (concat "
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1,
+               user-scalable=no'
+      name='viewport'>
+<style>"
+(with-temp-buffer
+  (insert-file-contents "~/.doom.d/org-export.css")
+  (buffer-string))
+"</string>"
+))
 
 (setq org-html-head org-html-head-dank)
 
@@ -356,7 +358,7 @@ Return the list of results."
 ;; -------------------------------------------------------------------------- ;;
 
 (use-package! cc-mode
-	:config
+  :config
   (setq indent-tabs-mode t     ;; Pressing TAB should cause indentation
         c-indent-level 2       ;; A TAB is equivelant to two spaces
         c-tab-always-indent t
