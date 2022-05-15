@@ -11,10 +11,16 @@
 ;;
 ;; -------------------------------------------------------------------------- ;;
 
+;; `add-load-path!' processes paths relative to "this" file.
+(add-load-path! "lisp")
+
+
+;; -------------------------------------------------------------------------- ;;
+
 (setq user-full-name    "Alex Ameen"
       user-mail-address (if (eq config-kind :HOME)
                           "alex.ameen.tx@gmail.com"
-                          "aameen@cadence.com"))
+                          "alex.ameen@tulip.co"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -47,30 +53,28 @@
 
 
 ;; -------------------------------------------------------------------------- ;;
-;;
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory (if (eq config-kind :WORK)
-                        "~/docs"
-                      "~/docs/notes"))
+(setq org-directory "~/docs/notes")
 
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
-(defun org-open-default-notes ()
+(defun ak/org-open-default-notes ()
   "Open the default Org notes file set by `org-default-notes-file'."
   (find-file org-default-notes-file))
 
-(defun evil-org-notes ()
+(defun ak/evil-org-notes ()
   "Open the default Org notes file set by `org-default-notes-file'."
   (interactive)
-  (org-open-default-notes))
+  (ak/org-open-default-notes))
 
-(evil-ex-define-cmd "org-open-default-notes" 'evil-org-notes)
-(evil-ex-define-cmd "org-notes"              'evil-org-notes)
+(evil-ex-define-cmd "ak/org-open-default-notes" 'ak/evil-org-notes)
+(evil-ex-define-cmd "ak/org-notes"              'ak/evil-org-notes)
 
 (map! :leader
       (:prefix-map ("n" . "notes")
-       :desc "Org default notes" "h" #'evil-org-notes))
+       :desc "Org default notes" "h" #'ak/evil-org-notes))
 
 ;; Insert "Open `org-notes'" as below "Reload last session" ( second element )
 (setcdr
@@ -93,7 +97,7 @@
      "* %? [[%:link][%:description]] \nCaptured On: %U")))
 
 
-(defun org-get-headline-at-point ()
+(defun ak/org-get-headline-at-point ()
   "Return the Org headline at the cursor.
 This is suitable for use with `org-map-entries' calls to collect headlines."
   (interactive)
@@ -133,7 +137,7 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
   :custom
   (org-roam-directory (file-truename (concat org-directory "/roam"))))
 
-(defun org-structure--mk-lang (lang &optional alias)
+(defun ak/org-structure--mk-lang (lang &optional alias)
   (let* ((name (or alias lang))
          (t-base (concat "src " lang))
          (t-rsl (concat t-base " :results output :exports results"))
@@ -144,39 +148,40 @@ This is suitable for use with `org-map-entries' calls to collect headlines."
                   (cons (concat name "l") t-lit)))
         (add-to-list 'org-structure-template-alist structure))))
 
-(defun org-add-custom-templates ()
-  (progn (org-structure--mk-lang "sh")
-         (org-structure--mk-lang "zsh")
-         (org-structure--mk-lang "lisp" "cl")
-         (org-structure--mk-lang "tcl")
-         (org-structure--mk-lang "python" "py")
-         (org-structure--mk-lang "nix")))
+(defun ak/org-add-custom-templates ()
+  (progn (ak/org-structure--mk-lang "sh")
+         (ak/org-structure--mk-lang "zsh")
+         (ak/org-structure--mk-lang "lisp" "cl")
+         (ak/org-structure--mk-lang "tcl")
+         (ak/org-structure--mk-lang "python" "py")
+         (ak/org-structure--mk-lang "nix")))
+
+(defun org-babel-execute:nix (body params)  ;; FIXME: params
+  "Execute a block of Template code with org-babel. This function is called
+by `org-babel-execute-src-block'"
+  (message "executing Nix source block")
+  (let* ((tmp-src-file (org-babel-temp-file "nix-src-" ".nix"))
+          ;(processed-params (org-babel-process-params params))
+          (coding-system-for-read 'utf-8)
+          (coding-system-for-write 'utf-8))
+    (with-temp-file tmp-src-file (insert body))
+    (let ((results (org-babel-eval
+                    (format "%s eval -f %s"
+                            org-babel-nix-command
+                            (org-babel-process-file-name tmp-src-file))
+                    "")))
+      (if results
+          (org-babel-read (org-babel-trim results) t)
+        (message "fuck")))))
+
 
 (after! org
-	(org-add-custom-templates)
+  (ak/org-add-custom-templates)
 
   ;; I cribbed most of this from
   ;; https://github.com/pope/ob-go/blob/master/ob-go.el
   ;; Shockinly it works, but obviously it's very crude.
   (defvar org-babel-nix-command "nix")
-
-  (defun org-babel-execute:nix (body params)  ;; FIXME: params
-    "Execute a block of Template code with org-babel. This function is called
-by `org-babel-execute-src-block'"
-    (message "executing Nix source block")
-    (let* ((tmp-src-file (org-babel-temp-file "nix-src-" ".nix"))
-           ;(processed-params (org-babel-process-params params))
-           (coding-system-for-read 'utf-8)
-           (coding-system-for-write 'utf-8))
-      (with-temp-file tmp-src-file (insert body))
-      (let ((results (org-babel-eval
-                      (format "%s eval -f %s"
-                              org-babel-nix-command
-                              (org-babel-process-file-name tmp-src-file))
-                      "")))
-        (if results
-            (org-babel-read (org-babel-trim results) t)
-          (message "fuck")))))
 
   ; For whatever reason this works on OSX but not here?
   ;(add-to-list +org-babel-mode-alist '((nix . nix)))
@@ -249,41 +254,21 @@ by `org-babel-execute-src-block'"
 ;;
 ;; -------------------------------------------------------------------------- ;;
 
-(defun mapcar* (function &rest args)
-  "Apply FUNCTION to successive cars of all ARGS.
-Return the list of results."
-  ;; If no list is exhaused,
-  (if (not (memq nil args))
-      ;; Apply FUNCTION to CARs.
-      (cons (apply function (mapcar 'car args))
-            (apply 'mapcar* function
-                   ;; Recurse for rest of elements
-                   (mapcar 'cdr args)))))
-
-
-(defun mappairs (function pairs)
-  "Apply FUNCTION ( of two arguments ) to successive cells of argument pairs.
-Return the list of results."
-  (mapcar (lambda (p) (funcall function (car p) (cdr p))) pairs))
-
-
-;; Fill Column Indicator: --------------------------------------------------- ;;
-
 (use-package! fci-mode
   :after-call doom-before-switch-buffer-hook
   :config
   (defvar-local company-fci-mode-on-p nil)
 
-  (defun company-turn-off-fci (&rest ignore)
+  (defun ak/company-turn-off-fci (&rest ignore)
     (setq company-fci-mode-on-p fci-mode)
     (when fci-mode (fci-mode -1)))
 
-  (defun company-maybe-turn-on-fci (&rest ignore)
+  (defun ak/company-maybe-turn-on-fci (&rest ignore)
     (when company-fci-mode-on-p (fci-mode 1)))
 
-  (add-hook 'company-completion-started-hook #'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook #'company-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook #'company-turn-on-fci))
+  (add-hook 'company-completion-started-hook #'ak/company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook #'ak/company-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook #'ak/company-turn-on-fci))
 
 (add-hook 'prog-mode-hook #'fci-mode)
 
@@ -291,40 +276,38 @@ Return the list of results."
 ;; visible characters in the source code blocks in the html file.
 ;; http://lists.gnu.org/archive/html/emacs-orgmode/2014-09/msg00777.html
 (with-eval-after-load 'fill-column-indicator
-  (defvar modi/htmlize-initial-fci-state nil
+  (defvar ak/htmlize-initial-fci-state nil
     "Variable to store the state of `fci-mode' when `htmlize-buffer' is called.")
 
-  (defun modi/htmlize-before-hook-fci-disable ()
-    (setq modi/htmlize-initial-fci-state fci-mode)
-    (when fci-mode
-      (fci-mode -1)))
+  (defun ak/htmlize-before-hook-fci-disable ()
+    (setq ak/htmlize-initial-fci-state fci-mode)
+    (when fci-mode (fci-mode -1)))
 
-  (defun modi/htmlize-after-hook-fci-enable-maybe ()
-    (when modi/htmlize-initial-fci-state
-      (fci-mode 1)))
+  (defun ak/htmlize-after-hook-fci-enable-maybe ()
+    (when ak/htmlize-initial-fci-state (fci-mode 1)))
 
-  (add-hook 'htmlize-before-hook #'modi/htmlize-before-hook-fci-disable)
-  (add-hook 'htmlize-after-hook #'modi/htmlize-after-hook-fci-enable-maybe))
+  (add-hook 'htmlize-before-hook #'ak/htmlize-before-hook-fci-disable)
+  (add-hook 'htmlize-after-hook #'ak/htmlize-after-hook-fci-enable-maybe))
 
 
 ;; -------------------------------------------------------------------------- ;;
 
 ;; Insert shell command output into buffer
-(defun insert-shell-output (command)
+(defun ak/insert-shell-output (command)
   "Insert output of shell COMMAND at point in current buffer."
   (insert (shell-command-to-string command)))
 
 (after! evil
-  (defun evil-insert-shell-output (command)
-    "Makes `insert-shell-output' available as an EX command."
+  (defun ak/evil-insert-shell-output (command)
+    "Makes `ak/insert-shell-output' available as an EX command."
     (interactive "MShell Command: ")
-    (insert-shell-output command))
+    (ak/insert-shell-output command))
 
-  (evil-ex-define-cmd "insert-shell-output" 'evil-insert-shell-output)
+  (evil-ex-define-cmd "ak/insert-shell-output" 'ak/evil-insert-shell-output)
   ;; maps ` i\'
   (map! :leader
         (:prefix-map ("i" . "insert")
-         :desc "Shell cmd output" "\\" 'evil-insert-shell-output)))
+         :desc "Shell cmd output" "\\" 'ak/evil-insert-shell-output)))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -336,18 +319,6 @@ Return the list of results."
 
 
 ;; -------------------------------------------------------------------------- ;;
-
-;;(use-package! slime
-;;  :defer t
-;;  :init
-;;  (setq inferior-lisp-program "sbcl")
-;;  :config
-;;  (set-repl-handler! 'lisp-mode #'sly-mrepl)
-;;  (set-eval-handler! 'lisp-mode #'sly-eval-region)
-;;  (set-lookup-handlers! 'lisp-mode
-;;    :definition #'sly-edit-definition
-;;    :documentation #'sly-describe-symbol)
-;;  (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode))
 
 (use-package! sly
   :defer t
@@ -365,8 +336,7 @@ Return the list of results."
         c-basic-offset 2
         tab-width 2
         evil-shift-width 2
-        backward-delete-function nil  ;; Do not expand tabs when deleting
-        )
+        backward-delete-function nil)  ;; Do not expand tabs when deleting
 
   (sp-local-pair 'cc-mode "`" "'")  ;; Use Latex style quotes
 
@@ -386,8 +356,9 @@ Return the list of results."
   ;;        '+
   ;;      '++))))
 
-  (mappairs 'c-set-offset '((defun-open         -)
-                            (substatement-open  +))))
+  (require 'ak-prelude)
+  (ak/mappairs 'c-set-offset '((defun-open         -)
+                               (substatement-open  +))))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -416,7 +387,7 @@ Return the list of results."
 
 ;; -------------------------------------------------------------------------- ;;
 
-(defun org-in-tangle-dir (sub-path)
+(defun ak/org-in-tangle-dir (sub-path)
   "Expand the SUB-PATH into the directory given by the tangle-dir
 property if that property exists, else use the
 `default-directory'."
@@ -428,6 +399,16 @@ property if that property exists, else use the
 
 ;; -------------------------------------------------------------------------- ;;
 
+(defun ak/emacs-lisp-mode-hook ()
+  (setq indent-tabs-mode nil
+        tab-width 2
+        evil-shift-width 2))
+
+(add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-mode-hook)
 
 
+;; -------------------------------------------------------------------------- ;;
+;;
+;;
+;;
 ;; ========================================================================== ;;

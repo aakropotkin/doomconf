@@ -15,7 +15,7 @@
 ;;      directory (for easy access to its source code).
 
 (setq config-kind
-      (if (string= (system-name) "sjcvl-aameen")
+      (if (string= (system-name) "alex-tulip.local")
           :WORK
         :HOME))
 
@@ -139,9 +139,7 @@
        ;;idris             ; a language you can depend on
        json                ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       (:cond ((eq config-kind :HOME)
-               javascript  ; all(hope(abandon(ye(who(enter(here))))))
-               ))
+       javascript          ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -160,9 +158,7 @@
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        python              ; beautiful is better than ugly
-       (:cond ((eq config-kind :WORK)
-               qt          ; the 'cutest' gui framework ever
-               ))
+       ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
        ;;rest              ; Emacs as a REST client
@@ -185,7 +181,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
+       calendar
        ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
