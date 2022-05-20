@@ -203,7 +203,7 @@ by `org-babel-execute-src-block'"
 (with-temp-buffer
   (insert-file-contents "~/.doom.d/org-export.css")
   (buffer-string))
-"</string>"
+"</style>"
 ))
 
 (setq org-html-head org-html-head-dank)
