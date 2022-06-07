@@ -185,6 +185,11 @@ by `org-babel-execute-src-block'"
 
   ; For whatever reason this works on OSX but not here?
   ;(add-to-list +org-babel-mode-alist '((nix . nix)))
+  (map! :leader
+        (:prefix-map ("j" . "jump")
+        :desc "Previous block" "k" #'org-previous-block)
+        (:prefix-map ("j" . "jump")
+        :desc "Next block" "j" #'org-next-block))
 )
 
 (after! ox
