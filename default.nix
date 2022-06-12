@@ -2,6 +2,8 @@
 , emacs
 , gnugrep
 , makeWrapper
+, rnix-lsp
+, libvterm
 , useClient ? false
 }:
 stdenv.mkDerivation {
@@ -9,6 +11,7 @@ stdenv.mkDerivation {
   version = "0.0.1";
   src = ./bin/emacs-client-wrapper;
   nativeBuildInputs = [makeWrapper];
+  propagatedBuildInputs = [rnix-lsp libvterm];
   dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
