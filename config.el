@@ -436,11 +436,13 @@ property if that property exists, else use the
     (interactive)
     (+ivy-file-search :query nil :in nixpkgs-source-path :all-files nil))
 
+  (require 'nix-buffer)
+
   (map! :localleader
         :map nix-mode-map
         "u" #'nix-update-fetch
         ;"f" #'nix-update-fetch
-        "F" #'nix-flake
+        ;"F" #'nix-flake
         "p" #'nix-format-buffer
         "r" #'nix-repl-show
         "S" #'nix-shell
@@ -453,6 +455,7 @@ property if that property exists, else use the
         ) ;; End Local Leader Map
 
   ) ;; End nix
+
 (add-hook 'nix-mode-local-vars-hook #'lsp!)
 
 (use-package! lsp
