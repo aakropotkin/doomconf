@@ -55,5 +55,8 @@
 (package! sly)
 (package! jq-mode)
 (package! tramp)
+(package! nix-buffer)
+(package! nix-mode
+  :recipe (:host github :repo "aameen-tulip/nix-mode" :branch "master")
 
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))
