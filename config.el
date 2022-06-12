@@ -14,6 +14,12 @@
 ;; `add-load-path!' processes paths relative to "this" file.
 (add-load-path! "lisp")
 
+(if (eq config-kind :WORK)
+    (add-to-list 'exec-path  (concat (getenv "HOME") "/.doom.d/nodejs/bin")) 
+    (add-to-list 'exec-path  (concat (getenv "HOME") "/.doom.d/cmake/bin")))
+(setq nodejs-repl-command (concat (getenv "HOME") "/.doom.d/nodejs/bin/node"))
+
+
 
 ;; -------------------------------------------------------------------------- ;;
 
@@ -166,14 +172,13 @@ by `org-babel-execute-src-block'"
           (coding-system-for-write 'utf-8))
     (with-temp-file tmp-src-file (insert body))
     (let ((results (org-babel-eval
-                    (format "%s eval -f %s"
+                    (format "%s eval --impure -f %s"
                             org-babel-nix-command
                             (org-babel-process-file-name tmp-src-file))
                     "")))
       (if results
           (org-babel-read (org-babel-trim results) t)
-        (message "fuck")))))
-
+        (message "Nix encountered an error")))))
 
 (after! org
   (ak/org-add-custom-templates)
@@ -304,10 +309,9 @@ by `org-babel-execute-src-block'"
     (ak/insert-shell-output command))
 
   (evil-ex-define-cmd "ak/insert-shell-output" 'ak/evil-insert-shell-output)
-  ;; maps ` i\'
   (map! :leader
         (:prefix-map ("i" . "insert")
-         :desc "Shell cmd output" "\\" 'ak/evil-insert-shell-output)))
+         :desc "Shell cmd output" "\\" #'ak/evil-insert-shell-output)))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -399,12 +403,66 @@ property if that property exists, else use the
 
 ;; -------------------------------------------------------------------------- ;;
 
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+
+;; -------------------------------------------------------------------------- ;;
+
 (defun ak/emacs-lisp-mode-hook ()
   (setq indent-tabs-mode nil
         tab-width 2
         evil-shift-width 2))
 
 (add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-mode-hook)
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(setq nixpkgs-source-path "~/repos/nixpkgs")
+(setq nix-source-path "~/repos/nix")
+
+(after! nix
+  ;; XXX: See `org-roam' note "nix-find-def" for a hideous way to lookup
+  ;; the file/line where an attribute or function was defined.
+  (require 'ivy)
+
+  (defun ak/nix-search-nix ()
+    "Search for `query' in Nix using `ivy'."
+    (interactive)
+    (+ivy-file-search :query nil :in nix-source-path :all-files nil))
+
+  (defun ak/nix-search-nixpkgs ()
+    "Search for `query' in Nixpkgs using `ivy'."
+    (interactive)
+    (+ivy-file-search :query nil :in nixpkgs-source-path :all-files nil))
+
+  (map! :localleader
+        :map nix-mode-map
+        "u" #'nix-update-fetch
+        ;"f" #'nix-update-fetch
+        "F" #'nix-flake
+        "p" #'nix-format-buffer
+        "r" #'nix-repl-show
+        "S" #'nix-shell
+        "B" #'nix-build
+        (:prefix-map ("s" . "search-nix")
+         "n" #'ak/nix-search-nix
+         "p" #'ak/nix-search-nixpkgs)
+        ;"u" #'nix-unpack
+        ;"o" #'+nix/lookup-option
+        ) ;; End Local Leader Map
+
+  ) ;; End nix
+(add-hook 'nix-mode-local-vars-hook #'lsp!)
+
+(use-package! lsp
+  :config
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("rnix-lsp"))
+    :major-modes '(nix-mode)
+    :server-id 'nix)))
 
 
 ;; -------------------------------------------------------------------------- ;;
