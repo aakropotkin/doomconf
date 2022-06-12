@@ -413,6 +413,59 @@ property if that property exists, else use the
 
 
 ;; -------------------------------------------------------------------------- ;;
+
+;; FIXME: different on every box
+(setq nixpkgs-source-path "/data/repos/nixpkgs")
+(setq nix-source-path "/data/repos/nix")
+
+(after! nix
+  ;; XXX: See `org-roam' note "nix-find-def" for a hideous way to lookup
+  ;; the file/line where an attribute or function was defined.
+  (require 'ivy)
+
+  (defun ak/nix-search-nix ()
+    "Search for `query' in Nix using `ivy'."
+    (interactive)
+    (+ivy-file-search :query nil :in nix-source-path :all-files nil))
+
+  (defun ak/nix-search-nixpkgs ()
+    "Search for `query' in Nixpkgs using `ivy'."
+    (interactive)
+    (+ivy-file-search :query nil :in nixpkgs-source-path :all-files nil))
+
+  (require 'nix-buffer)
+
+  (map! :localleader
+        :map nix-mode-map
+        "u" #'nix-update-fetch
+        ;"f" #'nix-update-fetch
+        ;"F" #'nix-flake
+        "p" #'nix-format-buffer
+        "r" #'nix-repl-show
+        "S" #'nix-shell
+        "B" #'nix-build
+        (:prefix-map ("s" . "search-nix")
+         "n" #'ak/nix-search-nix
+         "p" #'ak/nix-search-nixpkgs)
+        ;"u" #'nix-unpack
+        ;"o" #'+nix/lookup-option
+        ) ;; End Local Leader Map
+
+  ) ;; End nix
+
+(add-hook 'nix-mode-local-vars-hook #'lsp!)
+
+(use-package! lsp
+  :config
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("rnix-lsp"))
+    :major-modes '(nix-mode)
+    :server-id 'nix)))
+
+
+;; -------------------------------------------------------------------------- ;;
 ;;
 ;;
 ;;
