@@ -28,6 +28,9 @@
 (setq tramp-default-method "ssh")
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
 
+(add-to-list 'exec-path
+             (concat (getenv "HOME") ""))
+
 
 ;; -------------------------------------------------------------------------- ;;
 ;;

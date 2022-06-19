@@ -50,6 +50,11 @@
 ;(unpin! t)
 
 
+(package! envrc)
+(package! lsp-ui)
+(package! dired-hide-dotfiles)
+(package! dired-ranger)
+
 (package! fill-column-indicator)
 (package! evil-visual-replace)
 (package! sly)
