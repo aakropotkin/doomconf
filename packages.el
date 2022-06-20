@@ -63,5 +63,6 @@
 (package! nix-buffer)
 (package! nix-mode
   :recipe (:host github :repo "aameen-tulip/nix-mode" :branch "master"))
+(package! info+)
 
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))

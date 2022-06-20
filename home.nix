@@ -18,6 +18,8 @@ in {
      *   SFTP, FTP, WebDAV, SMD, Udev, OBEX, MTP, AFP, HTTP, NFS, among others
      */
     pkgs.gnome3.gvfs
-    emacs-client-wrapper
+    #emacs-client-wrapper
+    cmake
+    libvterm
   ];
 }
