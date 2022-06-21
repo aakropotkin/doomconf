@@ -50,17 +50,17 @@
 ;(unpin! t)
 
 
-(package! envrc)
-(package! lsp-ui)
-(package! dired-hide-dotfiles)
-(package! dired-ranger)
+;(package! envrc)
+;(package! lsp-ui)
+;(package! dired-hide-dotfiles)
+;(package! dired-ranger)
 
-(package! fill-column-indicator)
-(package! evil-visual-replace)
-(package! sly)
-(package! jq-mode)
-(package! tramp)
-(package! nix-buffer)
+;(package! fill-column-indicator)
+;(package! evil-visual-replace)
+;(package! sly)
+;(package! jq-mode)
+;(package! tramp)
+;(package! nix-buffer)
 (package! nix-mode
   :recipe (:host github :repo "aameen-tulip/nix-mode" :branch "master"))
 (package! info+)
