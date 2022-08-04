@@ -57,6 +57,14 @@
 
 ;; -------------------------------------------------------------------------- ;;
 
+;; Generic Emacs settings
+
+(setq default-tab-width 2
+      standard-indent   2)
+
+
+;; -------------------------------------------------------------------------- ;;
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/docs/notes")
@@ -229,7 +237,22 @@ by `org-babel-execute-src-block'"
 ;; -------------------------------------------------------------------------- ;;
 ;; Set mode by file extension
 
-(add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.jq$" . jq-mode))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(use-package! sql-mode
+  :config
+  (setq indent-tabs-mode nil
+        tab-width 2
+        evil-shift-width 2))
+(defun +sql/open-repl ()
+  (interactive)
+  (sql-sqlite)
+  (pop-to-buffer "*SQL: SQLite*"))
+(set-repl-handler! 'sql-mode #'+sql/open-repl)
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -262,40 +285,40 @@ by `org-babel-execute-src-block'"
 ;;
 ;; -------------------------------------------------------------------------- ;;
 
-(use-package! fci-mode
-  :after-call doom-before-switch-buffer-hook
-  :config
-  (defvar-local company-fci-mode-on-p nil)
+;;;;(use-package! fci-mode
+;;;;  :after-call doom-before-switch-buffer-hook
+;;;;  :config
+;;;;  (defvar-local company-fci-mode-on-p nil)
+;;;;
+;;;;  (defun ak/company-turn-off-fci (&rest ignore)
+;;;;    (setq company-fci-mode-on-p fci-mode)
+;;;;    (when fci-mode (fci-mode -1)))
+;;;;
+;;;;  (defun ak/company-maybe-turn-on-fci (&rest ignore)
+;;;;    (when company-fci-mode-on-p (fci-mode 1)))
+;;;;
+;;;;  (add-hook 'company-completion-started-hook #'ak/company-turn-off-fci)
+;;;;  (add-hook 'company-completion-finished-hook #'ak/company-turn-on-fci)
+;;;;  (add-hook 'company-completion-cancelled-hook #'ak/company-turn-on-fci))
 
-  (defun ak/company-turn-off-fci (&rest ignore)
-    (setq company-fci-mode-on-p fci-mode)
-    (when fci-mode (fci-mode -1)))
-
-  (defun ak/company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (fci-mode 1)))
-
-  (add-hook 'company-completion-started-hook #'ak/company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook #'ak/company-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook #'ak/company-turn-on-fci))
-
-(add-hook 'prog-mode-hook #'fci-mode)
+;;;;(add-hook 'prog-mode-hook #'fci-mode)
 
 ;; otherwise the invisible fci characters show up as funky looking
 ;; visible characters in the source code blocks in the html file.
 ;; http://lists.gnu.org/archive/html/emacs-orgmode/2014-09/msg00777.html
-(with-eval-after-load 'fill-column-indicator
-  (defvar ak/htmlize-initial-fci-state nil
-    "Variable to store the state of `fci-mode' when `htmlize-buffer' is called.")
-
-  (defun ak/htmlize-before-hook-fci-disable ()
-    (setq ak/htmlize-initial-fci-state fci-mode)
-    (when fci-mode (fci-mode -1)))
-
-  (defun ak/htmlize-after-hook-fci-enable-maybe ()
-    (when ak/htmlize-initial-fci-state (fci-mode 1)))
-
-  (add-hook 'htmlize-before-hook #'ak/htmlize-before-hook-fci-disable)
-  (add-hook 'htmlize-after-hook #'ak/htmlize-after-hook-fci-enable-maybe))
+;;;;(with-eval-after-load 'fill-column-indicator
+;;;;  (defvar ak/htmlize-initial-fci-state nil
+;;;;    "Variable to store the state of `fci-mode' when `htmlize-buffer' is called.")
+;;;;
+;;;;  (defun ak/htmlize-before-hook-fci-disable ()
+;;;;    (setq ak/htmlize-initial-fci-state fci-mode)
+;;;;    (when fci-mode (fci-mode -1)))
+;;;;
+;;;;  (defun ak/htmlize-after-hook-fci-enable-maybe ()
+;;;;    (when ak/htmlize-initial-fci-state (fci-mode 1)))
+;;;;
+;;;;  (add-hook 'htmlize-before-hook #'ak/htmlize-before-hook-fci-disable)
+;;;;  (add-hook 'htmlize-after-hook #'ak/htmlize-after-hook-fci-enable-maybe))
 
 
 ;; -------------------------------------------------------------------------- ;;
