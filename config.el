@@ -12,12 +12,16 @@
 ;; -------------------------------------------------------------------------- ;;
 
 ;; `add-load-path!' processes paths relative to "this" file.
-(add-load-path! "lisp")
+(add-load-path! (concat (getenv "HOME") "/.doom.d/lisp"))
+;; (add-load-path! "lisp") ;; This worked before you tried to update
 
 (if (eq config-kind :WORK)
-    (add-to-list 'exec-path  (concat (getenv "HOME") "/.doom.d/nodejs/bin")) 
-    (add-to-list 'exec-path  (concat (getenv "HOME") "/.doom.d/cmake/bin")))
-(setq nodejs-repl-command (concat (getenv "HOME") "/.doom.d/nodejs/bin/node"))
+    (progn
+      (add-to-list 'exec-path "/opt/homebrew/bin" 't)
+      (add-to-list 'exec-path (concat (getenv "HOME") "/.doom.d/nodejs/bin"))
+      (add-to-list 'exec-path (concat (getenv "HOME") "/.doom.d/cmake/bin"))
+      (setq nodejs-repl-command
+            (concat (getenv "HOME") "/.doom.d/nodejs/bin/node"))))
 
 
 
@@ -370,6 +374,15 @@ by `org-babel-execute-src-block'"
 (use-package! go-mode
         :config
   (setq indent-tabs-mode t
+        tab-width 2
+        evil-shift-width 2))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(use-package! json-mode
+        :config
+  (setq indent-tabs-mode nil
         tab-width 2
         evil-shift-width 2))
 

@@ -15,7 +15,8 @@
 ;;      directory (for easy access to its source code).
 
 (setq config-kind
-      (if (string= (system-name) "alex-tulip.local")
+      (if (or (string= (system-name) "alex-tulip.local")
+              (string= (system-name) "alex-tulip-2.local"))
           :WORK
         :HOME))
 

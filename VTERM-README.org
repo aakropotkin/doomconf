@@ -1,0 +1,21 @@
+#+TITLE: VTerm Darwin Install
+
+Yo this is a pain in the ass and is easy to botch.
+
+There's a few tricks:
+
+1. Compilation has to happen from within emacs usin `<SPACE> o t'.
+2. When emacs compiles it needs `cmake', `make', and `glibtool'
+   ( NOT `libtool', this comes from `homebrew' ).
+   + Your `config.el' adds `~/.doom.d/cmake' to `PATH', but for whatever
+     reason adding `/opt/homebrew/bin' ( containing `glibtool' ) wasn't
+     taking effect.
+   + You finally got this to "take" by running:
+#+BEGIN_SRC shell
+  rm -rf "$HOME/.emacs/.local/straight/build-28.1/vterm;
+  export PATH="$PATH:/opt/homebrew/bin:$HOME/.doom.d/cmake/bin";
+  # This writes some magic `env' file used by emacs AND reinstalls `vterm'
+  # module ( doesn't build it though ).
+  doom sync;
+  # Launch Emacs and use `<SPACE> o t' to build.
+#+END_SRC
