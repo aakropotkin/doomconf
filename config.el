@@ -12,7 +12,7 @@
 ;; -------------------------------------------------------------------------- ;;
 
 ;; `add-load-path!' processes paths relative to "this" file.
-(add-load-path! "lisp")
+(add-load-path! (concat (getenv "HOME") "/.doom.d/lisp"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -29,7 +29,7 @@
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
 
 (add-to-list 'exec-path
-             (concat (getenv "HOME") ""))
+             (concat (getenv "HOME") "/.local/bin"))
 
 
 ;; -------------------------------------------------------------------------- ;;
