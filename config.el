@@ -243,16 +243,16 @@ by `org-babel-execute-src-block'"
 
 ;; -------------------------------------------------------------------------- ;;
 
-(use-package! sql-mode
-  :config
-  (setq indent-tabs-mode nil
-        tab-width 2
-        evil-shift-width 2))
-(defun +sql/open-repl ()
-  (interactive)
-  (sql-sqlite)
-  (pop-to-buffer "*SQL: SQLite*"))
-(set-repl-handler! 'sql-mode #'+sql/open-repl)
+;(use-package! sql-mode
+;  :config
+;  (setq indent-tabs-mode nil
+;        tab-width 2
+;        evil-shift-width 2))
+;(defun +sql/open-repl ()
+;  (interactive)
+;  (sql-sqlite)
+;  (pop-to-buffer "*SQL: SQLite*"))
+;(set-repl-handler! 'sql-mode #'+sql/open-repl)
 
 
 ;; -------------------------------------------------------------------------- ;;
