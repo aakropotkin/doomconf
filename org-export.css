@@ -32,12 +32,12 @@ a {
 }
 p {
   margin: 6px 0;
-  text-align: justify;
+  text-align: left;
 }
 ul,
 ol {
   margin: 0;
-  text-align: justify;
+  text-align: left;
 }
 ul > li > code {
   color: #586b82;
