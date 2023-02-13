@@ -60,3 +60,9 @@
   :recipe (:host github :repo "aameen-tulip/nix-mode" :branch "master"))
 
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))
+
+(package! copilot
+  :recipe (:host github
+           :repo "zerolfx/copilot.el"
+           :branch "main"
+           :files ("*.el" "dist")))

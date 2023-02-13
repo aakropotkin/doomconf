@@ -64,6 +64,14 @@
 
 ;; -------------------------------------------------------------------------- ;;
 
+;; Generic Emacs settings
+
+(setq default-tab-width 2
+      standard-indent   2)
+
+
+;; -------------------------------------------------------------------------- ;;
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/docs/notes")
@@ -479,6 +487,24 @@ property if that property exists, else use the
     :new-connection (lsp-stdio-connection '("rnix-lsp"))
     :major-modes '(nix-mode)
     :server-id 'nix)))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+
+;; -------------------------------------------------------------------------- ;;
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         :map copilot-completion-map
+         ("<tab>" . 'copilot-accept-completion)
+         ("TAB" . 'copilot-accept-completion)))
 
 
 ;; -------------------------------------------------------------------------- ;;
