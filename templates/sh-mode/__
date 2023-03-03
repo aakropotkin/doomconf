@@ -15,7 +15,7 @@ _as_me="`(file-name-nondirectory buffer-file-name)`";
 
 _version="0.1.0";
 
-_usage_msg="\$_as_me [OPTIONS...] $0
+_usage_msg="USAGE: \$_as_me [OPTIONS...] $0
 
 $1
 ";
