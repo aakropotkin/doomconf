@@ -1,15 +1,18 @@
 {
   description = "Emacs Nix expressions";
 
-  inputs.utils.url        = "github:numtide/flake-utils/master";
   inputs.home-manager.url = "github:nix-community/home-manager";
 
-  inputs.utils.inputs.nixpkgs.follows        = "/nixpkgs";
   inputs.home-manager.inputs.nixpkgs.follows = "/nixpkgs";
 
-  outputs = { self, nixpkgs, utils, home-manager }: let
-    inherit (utils.lib) eachDefaultSystemMap;
+  outputs = { self, nixpkgs, home-manager }: let
     inherit (builtins) nixVersion compareVersions;
+    eachDefaultSystemMap = fn: builtins.foldl' ( acc: system: acc // {
+      ${system} = fn system;
+    } ) {} [
+      "x86_64-linux" "aarch64-linux" "i686-darwin"
+      "x86_64-darwin" "aarch64-darwin"
+    ];
     legacyDefault =
       if ( 0 < ( compareVersions nixVersion "2.6" ) ) then {} else {
         defaultPackages =
