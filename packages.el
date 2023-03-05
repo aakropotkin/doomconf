@@ -55,10 +55,10 @@
 ;(package! dired-hide-dotfiles)
 ;(package! dired-ranger)
 
-;(package! fill-column-indicator)
+(package! fill-column-indicator)
 ;(package! evil-visual-replace)
 ;(package! sly)
-;(package! jq-mode)
+(package! jq-mode)
 ;(package! tramp)
 ;(package! nix-buffer)
 (package! nix-mode

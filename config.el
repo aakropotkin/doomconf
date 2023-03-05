@@ -243,6 +243,12 @@ by `org-babel-execute-src-block'"
 
 ;; -------------------------------------------------------------------------- ;;
 
+;; General "programming mode" settings.
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+
+;; -------------------------------------------------------------------------- ;;
+
 ;(use-package! sql-mode
 ;  :config
 ;  (setq indent-tabs-mode nil
