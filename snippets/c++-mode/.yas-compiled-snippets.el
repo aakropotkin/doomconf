@@ -199,4 +199,4 @@ If found, the class name is returned, otherwise STR is returned"
                        ("acm" "auto sum = std::accumulate(std::begin(${1:container}), std::end($1), 0);" "accumulate" nil nil nil "/home/camus/.doom.d/snippets/c++-mode/accumulate" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:41 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:27 2023

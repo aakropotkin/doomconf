@@ -9,4 +9,4 @@
                         nil nil "/home/camus/.doom.d/snippets/json-mode/eslintConfig" nil "eslint")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:43 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:29 2023

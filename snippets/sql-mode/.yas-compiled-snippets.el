@@ -10,4 +10,4 @@
                        ("column" "    ,   ${1:Name}       ${2:Type}           ${3:NOT NULL}\n" ", ColumnName ColumnType NOT NULL..." nil nil nil "/home/camus/.doom.d/snippets/sql-mode/column" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:46 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:32 2023

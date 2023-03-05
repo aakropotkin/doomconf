@@ -5,4 +5,4 @@
                      '(("defun" "(defun ${1:fun} (${2:args})\n       $0\n)" "defun" nil nil nil "/home/camus/.doom.d/snippets/lisp-interaction-mode/defun" nil "defun")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:43 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:29 2023

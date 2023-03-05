@@ -9,4 +9,4 @@
                        ("__doom-doctor" ";;; `(+file-templates-get-short-path)` -*- lexical-binding: t; -*-\n\n$0\n" "__doom-doctor" nil nil nil "/home/camus/.doom.d/templates/emacs-lisp-mode/__doom-doctor" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:57 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:39 2023

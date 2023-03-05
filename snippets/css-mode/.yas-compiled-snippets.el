@@ -16,4 +16,4 @@
                        ("imp" "@import \"`(doom-snippets-text nil t)`$0\";" "@import" nil nil nil "/home/camus/.doom.d/snippets/css-mode/import" nil "imp")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:42 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:28 2023

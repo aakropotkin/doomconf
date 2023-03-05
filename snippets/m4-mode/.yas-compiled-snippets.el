@@ -5,4 +5,4 @@
                      '(("def" "define(\\`${1:macro}',\\`${2:subst}').\n$0" "def" nil nil nil "/home/camus/.doom.d/snippets/m4-mode/def" nil "def")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:44 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:30 2023

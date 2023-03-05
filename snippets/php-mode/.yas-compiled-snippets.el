@@ -37,4 +37,4 @@
                        ("acl" "abstract class ${1:Name}${2: extends ${3:Parent}}\n{\n    `%`$0\n}\n" "abstract class" nil nil nil "/home/camus/.doom.d/snippets/php-mode/abstract-class" nil "acl")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:44 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:30 2023

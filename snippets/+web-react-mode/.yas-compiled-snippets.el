@@ -19,4 +19,4 @@
                        ("action" "const ${1:$(upcase (s-snake-case yas-text))} = '${1:$(upcase (s-snake-case yas-text))}';\n\nexport const ${1:actionName} = (${2:args}) => ({\n  type: '${1:$(upcase (s-snake-case yas-text))}',\n  payload: {\n    $0\n  },\n});\n" "action" nil nil nil "/home/camus/.doom.d/snippets/+web-react-mode/action" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:41 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:26 2023

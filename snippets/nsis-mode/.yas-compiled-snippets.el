@@ -15,4 +15,4 @@
                        ("def" "!define ${1:CONSTANT} ${2:value}" "define" nil nil nil "/home/camus/.doom.d/snippets/nsis-mode/define" nil "def")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:44 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:30 2023

@@ -265,4 +265,4 @@
                        ("add-hook" "(add-hook '${0:hook} ${1:function})`(doom-snippets-newline-or-eol)`" "add-hook" nil nil nil "/home/camus/.doom.d/snippets/emacs-lisp-mode/add-hook" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:43 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:28 2023

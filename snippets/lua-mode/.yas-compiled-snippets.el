@@ -57,4 +57,4 @@
                        ("=+" "${1:varName} = $1 + ${2:1}" "self-addition" nil nil nil "/home/camus/.doom.d/snippets/lua-mode/add" nil "=+")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:44 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:30 2023

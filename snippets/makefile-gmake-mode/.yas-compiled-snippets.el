@@ -7,4 +7,4 @@
                        ("patsubst" "$(patsubst ${1:from},${2:to},${3:src})\n" "patsubst" nil nil nil "/home/camus/.doom.d/snippets/makefile-gmake-mode/patsubst" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:44 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:30 2023

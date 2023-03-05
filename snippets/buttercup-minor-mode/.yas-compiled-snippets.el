@@ -101,4 +101,4 @@
                        ("afa" "(after-all ${1:`(doom-snippets-format \"%n%s\")`})" "after-all ..." nil nil nil "/home/camus/.doom.d/snippets/buttercup-minor-mode/after-all" nil "afa")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:41 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:27 2023

@@ -232,4 +232,4 @@
                        ("if" "@if ${1:condition} {\n    `%`$0\n}" "@if" nil nil nil "/home/camus/.doom.d/snippets/scss-mode/@if" nil "if")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:45 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:31 2023

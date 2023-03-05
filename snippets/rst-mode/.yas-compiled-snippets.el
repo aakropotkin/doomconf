@@ -26,4 +26,4 @@
                        ("auto" ".. autoclass:: $0\n   ${1::members: ${2:members}}" "autoclass" nil nil nil "/home/camus/.doom.d/snippets/rst-mode/autoclass" nil "auto")))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:45 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:31 2023

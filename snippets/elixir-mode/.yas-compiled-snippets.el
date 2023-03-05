@@ -35,4 +35,4 @@
                        ("after" "after ${1:500} ->\n  $0" "after" nil nil nil "/home/camus/.doom.d/snippets/elixir-mode/after" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:42 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:28 2023

@@ -7,4 +7,4 @@
                        ("__" "[\n    $0\n]\n" "__" nil nil nil "/home/camus/.doom.d/templates/json-mode/__" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:57 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:40 2023

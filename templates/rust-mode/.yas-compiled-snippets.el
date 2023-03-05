@@ -6,4 +6,4 @@
                        ("__Cargo.toml" "[package]\nname = \"${1:Project Name}\"\nversion = \"0.0.1\"\nauthors = [ \"`user-full-name` <`user-mail-address`>\" ]\n$0\n" "__Cargo.toml" nil nil nil "/home/camus/.doom.d/templates/rust-mode/__Cargo.toml" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Mar  3 16:50:58 2023
+;;; Do not edit! File generated at Sun Mar  5 15:17:40 2023
