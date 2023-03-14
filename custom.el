@@ -15,7 +15,8 @@
      (eval c-set-offset 'innamespace 0)
      (indicate-empty-lines . t)
      (c-block-comment-prefix . "  ")
-     (eval add-hook 'before-save-hook 'time-stamp))))
+     (eval add-hook 'before-save-hook 'time-stamp)))
+ '(warning-suppress-types '((frameset) (defvaralias))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

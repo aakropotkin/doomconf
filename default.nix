@@ -3,6 +3,7 @@
 , gnugrep
 , makeWrapper
 , cmake
+, gcc
 , rnix-lsp
 , libvterm
 #, libvterm-static
@@ -17,6 +18,10 @@ stdenv.mkDerivation {
     rnix-lsp
     libvterm
     cmake
+    gcc
+    autoconf
+    automake
+    libtool
   ];
   dontUnpack = true;
   dontConfigure = true;
@@ -43,6 +48,7 @@ stdenv.mkDerivation {
       --set CMAKE "${cmake}/bin/cmake"                                       \
       --set RNIX_LSP "${rnix-lsp}/bin/rnix-lsp"                              \
       --set LIBVTERM_PREFIX "${libvterm}"                                    \
+      --set CC "${gcc}/bin/cc"                                               \
       ;
   '';
 }

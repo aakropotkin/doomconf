@@ -56,7 +56,7 @@
 ;(package! dired-ranger)
 
 (package! fill-column-indicator)
-;(package! evil-visual-replace)
+(package! evil-visual-replace)
 ;(package! sly)
 (package! jq-mode)
 ;(package! tramp)
