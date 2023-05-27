@@ -409,6 +409,21 @@ by `org-babel-execute-src-block'"
   (ak/mappairs 'c-set-offset '((defun-open         -)
                                (substatement-open  +))))
 
+;(use-package! ccls
+;  :after projectile
+;  :custom
+;    (ccls-args nil)
+;    (ccls-executable (executable-find "ccls"))
+;    (projectile-project-root-files-top-down-recurring
+;      (append '("compile_commands.json" ".ccls")
+;              projectile-project-root-files-top-down-recurring))
+;  :config
+;    (push ".ccls-cache" projectile-globally-ignored-directories))
+
+(use-package! ccls
+  :config
+  (setq lsp-lens-enable nil))
+
 
 ;; -------------------------------------------------------------------------- ;;
 
@@ -426,21 +441,6 @@ by `org-babel-execute-src-block'"
   (setq indent-tabs-mode nil
         tab-width        2
         evil-shift-width 2))
-
-
-;; -------------------------------------------------------------------------- ;;
-
-;(use-package! ccls
-;  :after projectile
-;  :custom
-;    (ccls-args nil)
-;    (ccls-executable (executable-find "ccls"))
-;    (projectile-project-root-files-top-down-recurring
-;      (append '("compile_commands.json" ".ccls")
-;              projectile-project-root-files-top-down-recurring))
-;  :config
-;    (push ".ccls-cache" projectile-globally-ignored-directories))
-
 
 
 ;; -------------------------------------------------------------------------- ;;
