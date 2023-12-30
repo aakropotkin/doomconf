@@ -109,4 +109,4 @@
                        ("ac" "\\newacronym{${1:label}}{${1:$(upcase yas-text)}}{${2:Name}}" "acronym" nil nil nil "/home/camus/.doom.d/snippets/latex-mode/acronym" nil "ac")))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:29 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023

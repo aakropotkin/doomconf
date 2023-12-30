@@ -292,4 +292,4 @@
                        ("@" "@param  ${1:parameter}  ${2:description}\n" "@param" nil nil nil "/home/camus/.doom.d/snippets/processing-mode/@param" nil "@")))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:31 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023

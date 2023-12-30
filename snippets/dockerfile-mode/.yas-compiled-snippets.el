@@ -23,4 +23,4 @@
                        ("add" "ADD ${1:src} ${2:dest}" "ADD <src> <dest>" nil nil nil "/home/camus/.doom.d/snippets/dockerfile-mode/add" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:28 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023

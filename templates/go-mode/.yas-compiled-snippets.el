@@ -6,4 +6,4 @@
                        ("__.go" "package ${1:main}\n\nimport (\n   \"fmt\"\n)\n\n$0" "__.go" nil nil nil "/home/camus/.doom.d/templates/go-mode/__.go" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:39 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:16 2023

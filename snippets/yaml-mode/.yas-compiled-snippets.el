@@ -7,4 +7,4 @@
                        ("entry" "${1:entry}: ${2:value}\n$0" "entry" nil nil nil "/home/camus/.doom.d/snippets/yaml-mode/entry" nil "entry")))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:32 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023

@@ -188,6 +188,9 @@ by `org-babel-execute-src-block'"
 
 (after! org
   (ak/org-add-custom-templates)
+  (add-to-list 'org-src-lang-modes '("console" . sh))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '(console . t))
 
   ;; I cribbed most of this from
   ;; https://github.com/pope/ob-go/blob/master/ob-go.el
@@ -238,7 +241,8 @@ by `org-babel-execute-src-block'"
 ;; Set mode by file extension
 
 (add-to-list 'auto-mode-alist
-             '("\\.jq$" . jq-mode))
+             '("\\.jq$" . jq-mode)
+             '("\\.bats$" . bats-mode))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -425,6 +429,12 @@ by `org-babel-execute-src-block'"
   (setq lsp-lens-enable nil))
 
 
+(use-package! flycheck-clang-tidy
+  :after flycheck
+  :hook
+  (flycheck-mode . flycheck-clang-tidy-setup))
+
+
 ;; -------------------------------------------------------------------------- ;;
 
 (use-package! go-mode
@@ -521,6 +531,21 @@ property if that property exists, else use the
     :new-connection (lsp-stdio-connection '("rnix-lsp"))
     :major-modes '(nix-mode)
     :server-id 'nix)))
+
+;; -------------------------------------------------------------------------- ;;
+
+(setq copilot-node-executable "~/.nix-profile/bin/node")
+
+;; Accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+         ("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         ("C-p C-<tab>" . 'copilot-accept-completion)
+         ("C-p C-TAB" . 'copilot-accept-completion)
+         ("<tab>" . 'copilot-accept-completion)
+         ("TAB" . 'copilot-accept-completion)))
 
 
 ;; -------------------------------------------------------------------------- ;;

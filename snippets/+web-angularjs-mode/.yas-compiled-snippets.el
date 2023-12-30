@@ -669,4 +669,4 @@
                         nil nil "/home/camus/.doom.d/snippets/+web-angularjs-mode/$anchorScroll" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:26 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:14 2023

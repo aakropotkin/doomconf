@@ -57,16 +57,17 @@ $3
 
 # ---------------------------------------------------------------------------- #
 
-declare -a tmp_files tmp_dirs;
-tmp_files=();
-tmp_dirs=();
+_TMP_FILES='';
+_TMP_DIRS='';
+export _TMP_FILES _TMP_DIRS;
+
 
 mktmp_auto() {
-  local _f;
-  _f="\$( \$MKTEMP "\$@"; )";
+  local _tmp;
+  _tmp="\$( \$MKTEMP "\$@"; )";
   case " \$* " in
-    *\ -d\ *|*\ --directory\ *) tmp_dirs+=( "\$_f" ); ;;
-    *)                          tmp_files+=( "\$_f" ); ;;
+    *\ -d\ *|*\ --directory\ *) export _TMP_DIRS="\$_TMP_DIRS:\$_tmp"; ;;
+    *)                          export _TMP_FILES="\$_TMP_FILES:\$_tmp"; ;;
   esac
   echo "\$_f";
 }
@@ -75,8 +76,17 @@ mktmp_auto() {
 # ---------------------------------------------------------------------------- #
 
 cleanup() {
-  rm -f "\${tmp_files[@]}";
-  rm -rf "\${tmp_dirs[@]}";
+  local _tmp_files _tmp_dirs;
+  if [[ -n "\$_TMP_FILES" ]]; then
+    IFS=':' read -r `(if (equal (file-name-extension buffer-file-name) "zsh")
+                         "-A" "-a")` _tmp_files <<< "\$_TMP_FILES";
+    rm -f "\${_tmp_files[@]}";
+  fi
+  if [[ -n "\$_TMP_DIRS" ]]; then
+    IFS=':' read -r `(if (equal (file-name-extension buffer-file-name) "zsh")
+                         "-A" "-a")` _tmp_dirs <<< "\$_TMP_DIRS";
+    rm -rf "\${_tmp_dirs[@]}";
+  fi
 }
 
 _es=0;

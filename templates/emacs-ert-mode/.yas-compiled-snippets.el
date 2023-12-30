@@ -5,4 +5,4 @@
                      '(("__" ";;; `(file-name-nondirectory buffer-file-name)`\n\n$0" "__" nil nil nil "/home/camus/.doom.d/templates/emacs-ert-mode/__" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:39 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:16 2023

@@ -141,4 +141,4 @@
                        ("fo" "File::open(${1:`%`})`(if (eolp) \";\" \"\")`" "File::open(...)" nil nil nil "/home/camus/.doom.d/snippets/rust-mode/File-open" nil "fo")))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:31 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023

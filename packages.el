@@ -60,7 +60,7 @@
 ;(package! sly)
 (package! jq-mode)
 ;(package! tramp)
-;(package! nix-buffer)
+(package! nix-buffer)
 (package! nix-mode
   :recipe (:host github :repo "aameen-tulip/nix-mode" :branch "master"))
 (package! info+)
@@ -71,3 +71,13 @@
            :files ("*.el" "dist")))
 
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))
+(package! gh)
+
+(package! bats-mode)
+
+(package! flycheck-clang-tidy)
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+
+(package! just-mode)

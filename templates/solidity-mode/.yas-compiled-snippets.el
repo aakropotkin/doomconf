@@ -7,4 +7,4 @@
                         nil "/home/camus/.doom.d/templates/solidity-mode/__sol" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:40 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:16 2023

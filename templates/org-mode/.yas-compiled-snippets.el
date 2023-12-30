@@ -9,4 +9,4 @@
                        ("__" "#+TITLE: ${1:`\n(string-join\n (mapcar #'capitalize\n         ;; Replace -,_... with space\n         (split-string\n          (let (case-fold-search)\n            ;; Seperating lower from upper: hello|World\n            (replace-regexp-in-string\n             \"\\\\([[:lower:]]\\\\)\\\\([[:upper:]]\\\\)\" \"\\\\1 \\\\2\"\n             ;; Separating upper from (upper and lower): HTTP|Server\n             (replace-regexp-in-string \"\\\\([[:upper:]]\\\\)\\\\([[:upper:]][0-9[:lower:]]\\\\)\"\n                                       \"\\\\1 \\\\2\" (file-name-base buffer-file-name))))\n          \"[^[:word:]0-9]+\"\n          )) \" \" )\n`}\n\n$0" "Org template" nil nil nil "/home/camus/.doom.d/templates/org-mode/__" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:40 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:16 2023

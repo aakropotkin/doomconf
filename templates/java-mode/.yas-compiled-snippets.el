@@ -6,4 +6,4 @@
                        ("__" "package `(+java-current-package)`;\n\npublic class `(+java-current-class)` $1\n{\n    $0\n}\n" "Java file template" nil nil nil "/home/camus/.doom.d/templates/java-mode/__" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:39 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:16 2023

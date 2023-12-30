@@ -18,4 +18,4 @@
                        ("class" "class ${1:name}${2:($3)}${4: : $5}${6: {\n    $0\n}}\n" "class" nil nil nil "/home/camus/.doom.d/snippets/kotlin-mode/class" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Mar  5 15:17:29 2023
+;;; Do not edit! File generated at Mon Mar 20 17:06:15 2023
