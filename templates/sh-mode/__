@@ -53,6 +53,20 @@ usage() {
 : "\${REALPATH:=realpath}";
 : "\${MKTEMP:=mktemp}";
 $3
+# @END_INJECT_UTILS@
+
+# @BEGIN_INJECT_PATH@
+`(if (equal (file-name-extension buffer-file-name) "zsh")
+     "PATH=\"\${PATH:+\$PATH:}\${0:a:h}\";
+if [[ -d \"\${0:a:h}/../libexec\" ]]; then
+  PATH=\"\$PATH:\${0:a:h}/../libexec\";
+fi"
+     "PATH=\"\${PATH:+\$PATH:}\${BASH_SOURCE[0]%/*}\";
+if [[ -d \"\${BASH_SOURCE[0]%/*}/../libexec\" ]]; then
+  PATH=\"\$PATH:\${BASH_SOURCE[0]%/*}/../libexec\";
+fi")`
+export PATH;
+# @END_INJECT_PATH@
 
 
 # ---------------------------------------------------------------------------- #
