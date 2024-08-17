@@ -4,7 +4,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((eval c-set-offset 'inlambda 0)
+   '((sql-mysql-login-params
+      '((user :default "camus")
+        (password :default "")
+        (database :default "sakila")
+        (server :default "localhost")
+        (port :default 3306)))
+     (eval c-set-offset 'inlambda 0)
      (eval c-set-offset 'access-label '-)
      (eval c-set-offset 'substatement-open 0)
      (eval c-set-offset 'arglist-cont-nonempty '+)

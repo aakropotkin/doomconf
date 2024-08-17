@@ -12,7 +12,7 @@
 ;; -------------------------------------------------------------------------- ;;
 
 ;; `add-load-path!' processes paths relative to "this" file.
-(add-load-path! (concat (getenv "HOME") "/.doom.d/lisp"))
+(add-load-path! (concat doom-user-dir "/lisp"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -28,8 +28,7 @@
 (setq tramp-default-method "ssh")
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
 
-(add-to-list 'exec-path
-             (concat (getenv "HOME") "/.local/bin"))
+(add-to-list 'exec-path (concat doom-user-dir "/.local/bin"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -217,7 +216,7 @@ by `org-babel-execute-src-block'"
       name='viewport'>
 <style>"
 (with-temp-buffer
-  (insert-file-contents "~/.doom.d/org-export.css")
+  (insert-file-contents (concat doom-user-dir "/org-export.css"))
   (buffer-string))
 "</style>"
 ))
@@ -231,7 +230,7 @@ by `org-babel-execute-src-block'"
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-(setq +file-templates-dir "~/.doom.d/templates/")
+(setq +file-templates-dir (concat doom-user-dir "/templates/"))
 
 
 ;; -------------------------------------------------------------------------- ;;
@@ -473,8 +472,8 @@ property if that property exists, else use the
 ;; -------------------------------------------------------------------------- ;;
 
 ;; FIXME: different on every box
-(setq nixpkgs-source-path "/data/repos/nixpkgs")
-(setq nix-source-path "/data/repos/nix")
+(setq nixpkgs-source-path "~/repos/nixpkgs")
+(setq nix-source-path "~/repos/nix")
 
 (after! nix
   ;; XXX: See `org-roam' note "nix-find-def" for a hideous way to lookup

@@ -71,3 +71,6 @@
            :files ("*.el" "dist")))
 
 ;(package! org-plus-contrib :recipe (:host github :repo "emacs-straight/org"))
+
+(package! bison-mode
+  :recipe (:host github :repo "Wilfred/bison-mode" :branch "master"))
